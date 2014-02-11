@@ -20,8 +20,7 @@ Juggle-Transition does not support the following jugglinglab features:
  - ! after a sync throw to remove the half pause beat
  - (p^n) to repeat a subsequence several times (that wouldn't even make sense here...)
  - Sequences with a mix of sync and async throws.
-  
-Note that Juggle-Transition will happily transition you between a sync pattern and an async pattern.  However it will not accept a pattern that includes both types of throws.
+    - Note that Juggle-Transition will happily transition you between a sync pattern and an async pattern.  However it will not accept a pattern that includes both types of throws.
 
 To Do list for Juggle-Transition:
  - refactor get_state functions using counters instead of lists to hold intermediate values?
