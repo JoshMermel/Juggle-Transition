@@ -3,6 +3,12 @@ Juggle-Transition
 
 A python program for finding transitions between juggling patterns
 
+This software has been tested but not extensively.  I belive that it works in all cases but don't have proof of that.
+
+Given two valid juggling sequences of the same number of balls, Juggle-Transition finds a transition between them.  If either is async it will find two transitions, one for starting the pattern on the left and the other for starting it on the right.  The transitions are suitable to be animated by jugglinglab.
+
+To use it, you will need ply, a lex-yacc package for python.  http://www.dabeaz.com/ply/ply.html
+
 Juggle-Transition supports the following siteswap features:
  - async sequences
  - sync sequences (including *)
