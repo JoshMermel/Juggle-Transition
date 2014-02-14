@@ -11,12 +11,7 @@ __Known bug__: When asked to transition between 3 and 00555, the program says:
 The second is correct.  The first is incorrect in an interesting way.  The bug
 seems to be that when transitioning from an async pattern, if the transtion
 length is longer than state1 then the program might make an error with left
-right parity.  Interesting, there may not be an answer here except to recognize
-our bad input and not print it.  I don't know that there is a transition from 3
-to 00555 which enters both patterns on the left.
- - I haven't decided how to recognize inappropriate transitions yet.
-   Annecdotally they all contain #x throws but I'll have to think more to prove
-   that is a sufficient criterion.
+right parity. The answer I hope it will give is 8550.  
 
 Given two valid juggling sequences of the same number of balls,
 Juggle-Transition finds a transition between them.  If either is async it will
