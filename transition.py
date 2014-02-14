@@ -260,39 +260,39 @@ def async_get_state(siteswap):
 # position in siteswap.  I forgot they were the same when first writing this
 # and haven't refactored yet
 def sync_get_state(siteswap):
-    s = len(siteswap)
     num_balls = sync_num_balls(siteswap)
-    state = [[0 for x in xrange(s*num_balls*8)] for x in xrange(2)]
+    state = [Counter(), Counter()]
     to_place = num_balls
     state_len = 0;
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
-        m = (state_len/2) % s #position in the siteswap
+        pos = (state_len/2) % len(siteswap) # index in the siteswap
         #left half of a (,)
-        for i in range (0, len(siteswap[m][0])):
-            if siteswap[m][0][i].cross == 'x':
-                state[1][state_len + (siteswap[m][0][i].val)] += 1
-            else:
-                state[0][state_len + (siteswap[m][0][i].val)] += 1
+        for i in range (0, len(siteswap[pos][0])):
+            side = 1 if siteswap[pos][0][i].cross == 'x' else 0
+            state[side][state_len + (siteswap[pos][0][i].val)] += 1
         #right half of a (,)
-        for i in range (0, len(siteswap[m][1])):
-            if siteswap[m][1][i].cross == 'x':
-                state[0][state_len + (siteswap[m][1][i].val)] += 1
-            else:
-                state[1][state_len + (siteswap[m][1][i].val)] += 1
-        state[0][state_len] = len(siteswap[m][0]) - state[0][state_len]
-        state[1][state_len] = len(siteswap[m][1]) - state[1][state_len]
+        for i in range (0, len(siteswap[pos][1])):
+            side = 0 if siteswap[pos][1][i].cross == 'x' else 0
+            state[side][state_len + (siteswap[pos][1][i].val)] += 1
+        state[0][state_len] = len(siteswap[pos][0]) - state[0][state_len]
+        state[1][state_len] = len(siteswap[pos][1]) - state[1][state_len]
         to_place -= state[0][state_len]
         to_place -= state[1][state_len]
         state_len += 2
 
-    ret = [[] for x in xrange(2)]
-    for i in range (0, state_len):
-        for j in range (0, state[0][i]):
-            ret[0].append(i)
-        for j in range (0, state[1][i]):
-            ret[1].append(i)
+    ret = [[],[]]
 
+    for num,multiplicity in state[0].items():
+        if num < state_len:
+            for i in range (multiplicity):
+                ret[0].append(num)
+    for num,multiplicity in state[1].items():
+        if num < state_len:
+            for i in range (multiplicity):
+                ret[1].append(num)
+
+    print ret
     return ret
 
 # Given an async siteswap it switches which hand has the starting throw
@@ -499,28 +499,28 @@ while siteswap1 == None or not verify(siteswap1):
 state1 = get_state(siteswap1)
 type1 = siteswap_type(siteswap1)
 
-# Get second siteswap
-try:
-    input2 = raw_input('please enter the second pattern:\n')
-except EOFError:
-    sys.exit(1)
-siteswap2 = parser.parse(input2)
-while siteswap2 == None or \
-      not verify(siteswap2) or \
-      get_num_balls(siteswap1) != get_num_balls(siteswap2):
-    if siteswap2 == None:
-       message = ''
-    elif not verify(siteswap2):
-        message = 'invalid pattern, try again\n'
-    else:
-        message = 'patterns must have the same number of balls\n'
-    try:
-        input2 = raw_input(message)
-    except EOFError:
-        sys.exit(1)
-    siteswap2 = parser.parse(input2)
-state2 = get_state(siteswap2)
-type2 = siteswap_type(siteswap2)
-
-# Print their transitions
-get_transition(state1, state2, type1, type2)
+# # Get second siteswap
+# try:
+#     input2 = raw_input('please enter the second pattern:\n')
+# except EOFError:
+#     sys.exit(1)
+# siteswap2 = parser.parse(input2)
+# while siteswap2 == None or \
+#       not verify(siteswap2) or \
+#       get_num_balls(siteswap1) != get_num_balls(siteswap2):
+#     if siteswap2 == None:
+#        message = ''
+#     elif not verify(siteswap2):
+#         message = 'invalid pattern, try again\n'
+#     else:
+#         message = 'patterns must have the same number of balls\n'
+#     try:
+#         input2 = raw_input(message)
+#     except EOFError:
+#         sys.exit(1)
+#     siteswap2 = parser.parse(input2)
+# state2 = get_state(siteswap2)
+# type2 = siteswap_type(siteswap2)
+# 
+# # Print their transitions
+# get_transition(state1, state2, type1, type2)
