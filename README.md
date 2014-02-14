@@ -3,9 +3,7 @@ Juggle-Transition
 
 A python program for finding transitions between juggling patterns
 
-Known bug:
-----------
-When asked to transition between 3 and 00555, the program says:
+__Known bug__: When asked to transition between 3 and 00555, the program says:
 
  - To enter the second pattern on the left side, use 5x5x5x
  - To enter the second pattern on the right side, use 663
