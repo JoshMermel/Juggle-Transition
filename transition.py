@@ -282,7 +282,6 @@ def sync_get_state(siteswap):
         state_len += 2
 
     ret = [[],[]]
-
     for num,multiplicity in state[0].items():
         if num < state_len:
             for i in range (multiplicity):
@@ -499,28 +498,28 @@ while siteswap1 == None or not verify(siteswap1):
 state1 = get_state(siteswap1)
 type1 = siteswap_type(siteswap1)
 
-# # Get second siteswap
-# try:
-#     input2 = raw_input('please enter the second pattern:\n')
-# except EOFError:
-#     sys.exit(1)
-# siteswap2 = parser.parse(input2)
-# while siteswap2 == None or \
-#       not verify(siteswap2) or \
-#       get_num_balls(siteswap1) != get_num_balls(siteswap2):
-#     if siteswap2 == None:
-#        message = ''
-#     elif not verify(siteswap2):
-#         message = 'invalid pattern, try again\n'
-#     else:
-#         message = 'patterns must have the same number of balls\n'
-#     try:
-#         input2 = raw_input(message)
-#     except EOFError:
-#         sys.exit(1)
-#     siteswap2 = parser.parse(input2)
-# state2 = get_state(siteswap2)
-# type2 = siteswap_type(siteswap2)
-# 
-# # Print their transitions
-# get_transition(state1, state2, type1, type2)
+# Get second siteswap
+try:
+    input2 = raw_input('please enter the second pattern:\n')
+except EOFError:
+    sys.exit(1)
+siteswap2 = parser.parse(input2)
+while siteswap2 == None or \
+      not verify(siteswap2) or \
+      get_num_balls(siteswap1) != get_num_balls(siteswap2):
+    if siteswap2 == None:
+       message = ''
+    elif not verify(siteswap2):
+        message = 'invalid pattern, try again\n'
+    else:
+        message = 'patterns must have the same number of balls\n'
+    try:
+        input2 = raw_input(message)
+    except EOFError:
+        sys.exit(1)
+    siteswap2 = parser.parse(input2)
+state2 = get_state(siteswap2)
+type2 = siteswap_type(siteswap2)
+
+# Print their transitions
+get_transition(state1, state2, type1, type2)
