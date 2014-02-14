@@ -291,7 +291,6 @@ def sync_get_state(siteswap):
             for i in range (multiplicity):
                 ret[1].append(num)
 
-    print ret
     return ret
 
 # Expects an async siteswap; switches which hand has the starting throw
@@ -339,6 +338,24 @@ def no_conflict(state1, state2):
                 return False
             counterB = search(state1R[i], state2R, counterB)+1;
     return True
+
+# horrible temporary solution
+def first_throw(state):
+    if state[0] == []:
+        if state[1] == []:
+            return 'left'
+        if state[1][0] % 2 == 1:
+            return 'left'
+    if state[0][0] % 2 == 0:
+        return 'left'
+    return 'right'
+
+
+# horrible temporary solution
+def last_throw(state):
+    if max(state[0]) > max(state[1]):
+        return 'left'
+    return 'right'
 
 ### Converting siteswaps to strings for printing ###
 def pretty_str_multi(siteswap):
@@ -427,6 +444,13 @@ def transition_from_async(A, B):
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])
+    # begin trial fix?
+    if first_throw(B) == last_throw(A):
+        A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
+        throws_needed += 1
+        ret.append([])       
+    # end trial fix?
+
     final_size = throws_needed
     counter_want = 0
 
