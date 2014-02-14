@@ -8,8 +8,8 @@ This software has been tested but not extensively.  I belive that it works in al
 update: there is at least one bug:
 When asked to transition between 3 and 00555, the program says:
 
-To enter the second pattern on the left side, use 5x5x5x
-To enter the second pattern on the right side, use 663
+ - To enter the second pattern on the left side, use 5x5x5x
+ - To enter the second pattern on the right side, use 663
 
 The second is correct.  The first is incorrect in an interesting way.
 
