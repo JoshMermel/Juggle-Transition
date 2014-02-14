@@ -235,26 +235,25 @@ def get_state(siteswap):
     return async_get_state(siteswap)
 
 def async_get_state(siteswap):
-    state = [];
-    s = len(siteswap)
+    state = Counter();
     num_balls = async_num_balls(siteswap)
-    for i in range (0, len(siteswap)*num_balls*2):
-        state.append(0);
     to_place = num_balls
     state_len = 0;
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
-        for i in range (0, len(siteswap[state_len % s])):
-            state[state_len+siteswap[state_len % s][i].val] += 1
-        state[state_len] = len(siteswap[state_len % s]) - state[state_len]
+        pos = state_len % len(siteswap) # position in the siteswap
+        for i in range (0, len(siteswap[pos])):
+            state[state_len+siteswap[pos][i].val] += 1
+        state[state_len] = len(siteswap[pos]) - state[state_len]
         to_place -= state[state_len]
         state_len += 1
+        
+    ret = [[],[]]
+    for num,multiplicity in state.items():
+        if num < state_len:
+            for i in range (multiplicity):
+                ret[num % 2].append(num)
 
-    ret = [[] for x in xrange(2)]
-    for i in range(0, state_len):
-        for j in range(0, state[i]):
-            ret[i % 2].append(i)
-            
     return ret
 
 # confusingly, state_len indexes the write position in ret, not the read
