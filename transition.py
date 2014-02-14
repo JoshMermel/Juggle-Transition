@@ -314,6 +314,18 @@ def no_conflict(state1, state2):
     state1R = state1[1]
     state2L = state2[0]
     state2R = state2[1]
+
+
+# This is a maybe better implementaton that doesn't use search.  I'll decide
+# which to use once I settle some bigger bugs.
+#    counterB = 0
+#    for i in range (0, len(state1L)):
+#        if state1L[i] >= 0:
+#            try:
+#                counterB += state2L[counterB:].index(state1L[i])
+#            except ValueError:
+#                return False
+
     counterB = 0
     for i in range (0, len(state1L)):
         if state1L[i] >= 0:
