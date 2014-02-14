@@ -11,7 +11,7 @@ When asked to transition between 3 and 00555, the program says:
  - To enter the second pattern on the left side, use 5x5x5x
  - To enter the second pattern on the right side, use 663
 
-The second is correct.  The first is incorrect in an interesting way.
+The second is correct.  The first is incorrect in an interesting way.  The bug seems to be that when transitioning from an async pattern, if the transtion length is longer than state1 then the program might make an error with left right parity.
 
 
 Given two valid juggling sequences of the same number of balls, Juggle-Transition finds a transition between them.  If either is async it will find two transitions, one for starting the pattern on the left and the other for starting it on the right.  The transitions are suitable to be animated by jugglinglab.
