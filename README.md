@@ -20,14 +20,14 @@ Juggle-Transition does not support the following jugglinglab features:
  - ! after a sync throw to remove the half pause beat
  - (p^n) to repeat a subsequence several times (that wouldn't even make sense here...)
  - Sequences with a mix of sync and async throws.
-  
-Note that Juggle-Transition will happily transition you between a sync pattern and an async pattern.  However it will not accept a pattern that includes both types of throws.
+    - Note that Juggle-Transition will happily transition you between a sync pattern and an async pattern.  However it will not accept a pattern that includes both types of throws.
 
 To Do list for Juggle-Transition:
+ - refactor get_state functions using counters instead of lists to hold intermediate values?
+   - Current implementation relies on a guess about the max length of a drop state and is unsafe
  - Make better function for detecting the type of a siteswap
  - refactor the verification functions, especially sync_verify
    - replace countdown lists with countdown counters?
- - refactor get_state functions using counters instead of lists to hold intermediate values?
  - Modularize the input
    - take input and calls itself until a passed in list of boolean functions are all passed?
    - is ths possible in python?
