@@ -276,8 +276,8 @@ def sync_get_state(siteswap):
             side = 0 if siteswap[pos][1][i].cross == 'x' else 0
             state[side][state_len + (siteswap[pos][1][i].val)] += 1
         state[0][state_len] = len(siteswap[pos][0]) - state[0][state_len]
-        state[1][state_len] = len(siteswap[pos][1]) - state[1][state_len]
         to_place -= state[0][state_len]
+        state[1][state_len] = len(siteswap[pos][1]) - state[1][state_len]
         to_place -= state[1][state_len]
         state_len += 2
 
@@ -295,7 +295,7 @@ def sync_get_state(siteswap):
     print ret
     return ret
 
-# Given an async siteswap it switches which hand has the starting throw
+# Expects an async siteswap; switches which hand has the starting throw
 def flip_state(state):
     return (state[1], state[0])
 
