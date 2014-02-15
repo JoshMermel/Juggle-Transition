@@ -164,10 +164,8 @@ def sync_verify(siteswap):
     for i in range (len(siteswap)):
         for j in range (len(siteswap[i][0])):
             val1 = siteswap[i][0][j].location(i, len(siteswap), False)
-            if(val1.cross == 'l'):
-                countdown[0][val1.val] += 1
-            else:
-                countdown[1][val1.val] += 1
+            side = 0 if val1.cross == 'l' else 1
+            countdown[side][val1.val] += 1
         for j in range (len(siteswap[i][1])):
             val2 = siteswap[i][1][j].location(i, len(siteswap), True)
             if(val2.cross == 'l'):
@@ -424,11 +422,6 @@ def transition_from_async(A, B):
         ret.append([])
     # If the lenght of the transition is more than the length of A, make sure
     # that left/right alignment is OK.
-    if first_throw(B) == last_throw(A) and max(max(A[0]), max(A[1])) == -1:
-        A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
-        throws_needed += 1
-        ret.append([])
-
     final_size = throws_needed
     counter_want = 0
 
