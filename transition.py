@@ -298,46 +298,24 @@ def flip_state(state):
     return (state[1], state[0])
 
 ### detecting conflicts ###
-# finds the index of x in v[startpos:end]
-# returns -1 if x isn't found in that range
-def search(x, v, startpos):
-    for i in range (startpos, len(v)):
-        if v[i] == x:
-            return i
-    return -1
 
 # Returns true if and only if every positive element in state1 appears in
 # state2 with at least the multiplicity
+# Here, states are lists
+def sub_no_conflict(state1, state2):
+   counterB = 0
+   for i in range (0, len(state1)):
+       if state1[i] >= 0:
+           try:
+               counterB += state2[counterB:].index(state1[i])
+           except ValueError:
+               return False
+   return True
+
+# Checks that there is no conflict in the left or right halves of a state
+# Here states are a pair of lists
 def no_conflict(state1, state2):
-    state1L = state1[0]
-    state1R = state1[1]
-    state2L = state2[0]
-    state2R = state2[1]
-
-
-# This is a maybe better implementaton that doesn't use search.  I'll decide
-# which to use once I settle some bigger bugs.
-#    counterB = 0
-#    for i in range (0, len(state1L)):
-#        if state1L[i] >= 0:
-#            try:
-#                counterB += state2L[counterB:].index(state1L[i])
-#            except ValueError:
-#                return False
-
-    counterB = 0
-    for i in range (0, len(state1L)):
-        if state1L[i] >= 0:
-            if search(state1L[i], state2L, counterB) == -1:
-                return False
-            counterB = search(state1L[i], state2L, counterB)+1;
-    counterB = 0
-    for i in range (0, len(state1R)):
-        if state1R[i] >= 0:
-            if search(state1R[i], state2R, counterB) == -1:
-                return False
-            counterB = search(state1R[i], state2R, counterB)+1;
-    return True
+    return sub_no_conflict(state1[0], state2[0]) and sub_no_conflict(state1[1], state2[1])
 
 # horrible temporary solution
 def first_throw(state):
@@ -450,7 +428,6 @@ def transition_from_async(A, B):
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])       
-    # end trial fix?
 
     final_size = throws_needed
     counter_want = 0
