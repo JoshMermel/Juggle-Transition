@@ -247,7 +247,7 @@ def async_get_state(siteswap):
         state[state_len] = len(siteswap[pos]) - state[state_len]
         to_place -= state[state_len]
         state_len += 1
-        
+
     ret = [[],[]]
     for num,multiplicity in state.items():
         if num < state_len:
@@ -393,7 +393,7 @@ def transition_from_sync(A, B):
             have.append(Toss(val,'r'))
         for i in range (0, -1 * count):
             want.append(Toss(val,'r'))
-   
+
     # Pair elements from have and want and insert them into ret at the appropriate location
     for i in range (0, len(A[0])):
         temp = Toss(A[0][i], 'l')
