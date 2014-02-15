@@ -428,7 +428,6 @@ def transition_from_async(A, B):
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])
-        print 'hi'
 
     final_size = throws_needed
     counter_want = 0
