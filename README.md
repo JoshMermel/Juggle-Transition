@@ -38,15 +38,14 @@ Juggle-Transition does not support the following jugglinglab features:
       includes both types of throws.
 
 To Do list for Juggle-Transition:
+ - refactor to be 80 cols wide
+    - do I care?
  - Make better function for detecting the type of a siteswap
  - refactor the verification functions, especially sync_verify
    - replace countdown lists with countdown counters?
  - Modularize the input
    - take input and calls itself until a passed in list of boolean functions are all passed?
    - is ths possible in python?
- - Improve the search function
-   - Binary search instead?
-   - http://stackoverflow.com/questions/364621/python-get-position-in-list ?
  - transition_from_* using 'l' and 'r' is bad.  
     - Why did I even do that?
         
