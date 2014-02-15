@@ -273,7 +273,7 @@ def sync_get_state(siteswap):
             state[side][state_len + (siteswap[pos][0][i].val)] += 1
         #right half of a (,)
         for i in range (0, len(siteswap[pos][1])):
-            side = 0 if siteswap[pos][1][i].cross == 'x' else 0
+            side = 0 if siteswap[pos][1][i].cross == 'x' else 1
             state[side][state_len + (siteswap[pos][1][i].val)] += 1
         state[0][state_len] = len(siteswap[pos][0]) - state[0][state_len]
         to_place -= state[0][state_len]
@@ -444,7 +444,8 @@ def transition_from_async(A, B):
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])
-    # begin trial fix?
+    # If the lenght of the transition is more than the length of A, make sure
+    # that left/right alignment is OK.
     if first_throw(B) == last_throw(A):
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
