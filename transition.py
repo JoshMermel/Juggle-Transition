@@ -168,10 +168,8 @@ def sync_verify(siteswap):
             countdown[side][val1.val] += 1
         for j in range (len(siteswap[i][1])):
             val2 = siteswap[i][1][j].location(i, len(siteswap), True)
-            if(val2.cross == 'l'):
-                countdown[0][val2.val] += 1
-            else:
-                countdown[1][val2.val] += 1
+            side = 0 if val2.cross == 'l' else 1
+            countdown[side][val2.val] += 1
 
     # Verify the countdown list is as expected
     for i in range (len(countdown[0])):
