@@ -424,10 +424,11 @@ def transition_from_async(A, B):
         ret.append([])
     # If the lenght of the transition is more than the length of A, make sure
     # that left/right alignment is OK.
-    if first_throw(B) == last_throw(A):
+    if first_throw(B) == last_throw(A) and max(max(A[0]), max(A[1])) == -1:
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
-        ret.append([])       
+        ret.append([])
+        print 'hi'
 
     final_size = throws_needed
     counter_want = 0
