@@ -3,17 +3,6 @@ Juggle-Transition
 
 A python program for finding transitions between juggling patterns
 
-__Known bug__: Earlier when asked to transition between 3 and 00555, the program says:
-
- - To enter the second pattern on the left side, use 5x5x5x
- - To enter the second pattern on the right side, use 663
-
-The second is correct.  The first is incorrect.  I believe this was caused when
-the transition length exceeded the state length it was coming from, the program
-would lose track of right/left parity.  This has been (probably) fixed in an
-ugly way with first_throw() and last_throw().
-
-
 Given two valid juggling sequences of the same number of balls,
 Juggle-Transition finds a transition between them.  If either is async it will
 find two transitions, one for starting the pattern on the left and the other
