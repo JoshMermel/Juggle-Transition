@@ -157,10 +157,7 @@ def sync_verify(siteswap):
                     return False
 
     # Build the countdown list
-    countdown = [[] for x in xrange(2)]
-    for i in range (len(siteswap)):
-        countdown[0].append(0)
-        countdown[1].append(0)
+    countdown = [Counter(), Counter()]
     for i in range (len(siteswap)):
         for j in range (len(siteswap[i][0])):
             desitnation = siteswap[i][0][j].location(i, len(siteswap), False)
@@ -172,10 +169,11 @@ def sync_verify(siteswap):
             countdown[side][desitnation.val] += 1
 
     # Verify the countdown list is as expected
-    for i in range (len(countdown[0])):
-        if countdown[0][i] != len(siteswap[i][0]):
+    for height, multiplicity in countdown[0].items():
+        if multiplicity != len(siteswap[height][0]):
             return False
-        if countdown[1][i] != len(siteswap[i][1]):
+    for height, multiplicity in countdown[1].items():
+        if multiplicity != len(siteswap[height][1]):
             return False
     return True
 
