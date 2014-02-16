@@ -26,6 +26,11 @@ Juggle-Transition does not support the following jugglinglab features:
       pattern and an async pattern.  However it will not accept a pattern that
       includes both types of throws.
 
+In general, I find find myself inexplicably driven to shorten functions.  I
+have tried my best to make readability a priority in the program but I
+appologize if I have made something more difficult to understand in my attempts
+to make it more conscise.
+
 To Do list for Juggle-Transition:
  - doccument data structures
  - have more helpful print messages
