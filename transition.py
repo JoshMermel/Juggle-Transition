@@ -76,7 +76,7 @@ def p_sync_sequence_no_star(p):
 def p_sync_sequence_star(p):
     '''sync_sequence_star :  sync_sequence STAR'''
     p[0] = p[1]
-    for i in range(0, len(p[1])):
+    for i in range(len(p[1])):
         p[0].append(p[1][i][::-1])
 
 # Rules for handling sync sequences
@@ -148,9 +148,9 @@ def verify(siteswap):
 
 def sync_verify(siteswap):
     # Check that all numbers are even and that 0x doesn't appear
-    for i in range (len(siteswap)):
-        for j in range (len(siteswap[i])):
-            for k in range (len(siteswap[i][j])):
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i])):
+            for k in range(len(siteswap[i][j])):
                 if siteswap[i][j][k].val % 2 != 0:
                     return False
                 if siteswap[i][j][k] == Toss(0,'x'):
@@ -158,12 +158,14 @@ def sync_verify(siteswap):
 
     # Build the countdown list
     countdown = [Counter(), Counter()]
-    for i in range (len(siteswap)):
-        for j in range (len(siteswap[i][0])):
+    for i in range(len(siteswap)):
+        # all left hand throws
+        for j in range(len(siteswap[i][0])):
             desitnation = siteswap[i][0][j].location(i, len(siteswap), False)
             side = 0 if desitnation.cross == 'l' else 1
             countdown[side][desitnation.val] += 1
-        for j in range (len(siteswap[i][1])):
+        # all right hand throws
+        for j in range(len(siteswap[i][1])):
             desitnation = siteswap[i][1][j].location(i, len(siteswap), True)
             side = 0 if desitnation.cross == 'l' else 1
             countdown[side][desitnation.val] += 1
@@ -179,15 +181,15 @@ def sync_verify(siteswap):
 
 def async_verify(siteswap):
     # Check no x's appear
-    for i in range(0, len(siteswap)):
-        for j in range (len(siteswap[i])):
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i])):
             if siteswap[i][j].cross == 'x':
                 return False
 
     # Build the countdown list
     countdown = Counter();
-    for i in range (len(siteswap)):
-        for j in range (len(siteswap[i])):
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i])):
             countdown[(siteswap[i][j].val+i) % len(siteswap)] += 1;
 
     # Verify the countdown list is as expected
@@ -204,17 +206,17 @@ def get_num_balls(siteswap):
 
 def async_num_balls(siteswap):
     total = 0
-    for i in range(0, len(siteswap)):
-        for j in range(0, len(siteswap[i])):
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i])):
             total += siteswap[i][j].val
     return total/len(siteswap)
 
 def sync_num_balls(siteswap):
     total = 0
-    for i in range(0, len(siteswap)):
-        for j in range(0, len(siteswap[i][0])):
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i][0])):
             total += siteswap[i][0][j].val
-        for j in range(0, len(siteswap[i][1])):
+        for j in range(len(siteswap[i][1])):
             total += siteswap[i][1][j].val
     return total/(2*len(siteswap))
 
@@ -233,7 +235,7 @@ def async_get_state(siteswap):
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
         pos = state_len % len(siteswap) # position in the siteswap
-        for i in range (len(siteswap[pos])):
+        for i in range(len(siteswap[pos])):
             state[state_len+siteswap[pos][i].val] += 1
         state[state_len] = len(siteswap[pos]) - state[state_len]
         to_place -= state[state_len]
@@ -242,7 +244,7 @@ def async_get_state(siteswap):
     ret = [[],[]]
     for num,multiplicity in state.items():
         if num < state_len:
-            for i in range (multiplicity):
+            for i in range(multiplicity):
                 ret[num % 2].append(num)
 
     return ret
@@ -258,11 +260,11 @@ def sync_get_state(siteswap):
     while to_place > 0:
         pos = (state_len/2) % len(siteswap) # index in the siteswap
         #left half of a (,)
-        for i in range (len(siteswap[pos][0])):
+        for i in range(len(siteswap[pos][0])):
             side = 1 if siteswap[pos][0][i].cross == 'x' else 0
             state[side][state_len + (siteswap[pos][0][i].val)] += 1
         #right half of a (,)
-        for i in range (len(siteswap[pos][1])):
+        for i in range(len(siteswap[pos][1])):
             side = 0 if siteswap[pos][1][i].cross == 'x' else 1
             state[side][state_len + (siteswap[pos][1][i].val)] += 1
         state[0][state_len] = len(siteswap[pos][0]) - state[0][state_len]
@@ -274,11 +276,11 @@ def sync_get_state(siteswap):
     ret = [[],[]]
     for num,multiplicity in state[0].items():
         if num < state_len:
-            for i in range (multiplicity):
+            for i in range(multiplicity):
                 ret[0].append(num)
     for num,multiplicity in state[1].items():
         if num < state_len:
-            for i in range (multiplicity):
+            for i in range(multiplicity):
                 ret[1].append(num)
 
     return ret
@@ -294,7 +296,7 @@ def flip_state(state):
 # Here, states are lists
 def sub_no_conflict(state1, state2):
    counterB = 0
-   for i in range (len(state1)):
+   for i in range(len(state1)):
        if state1[i] >= 0:
            try:
                counterB += state2[counterB:].index(state1[i])
@@ -375,32 +377,32 @@ def transition_from_sync(A, B):
     cA0.subtract(Counter(B[0]))
     cA1.subtract(Counter(B[1]))
     for val,count in cA0.items():
-        for i in range (count):
+        for i in range(count):
             have.append(Toss(val,'l'))
-        for i in range (-1 * count):
+        for i in range(-1 * count):
             want.append(Toss(val,'l'))
     for val,count in cA1.items():
-        for i in range (count):
+        for i in range(count):
             have.append(Toss(val,'r'))
-        for i in range (-1 * count):
+        for i in range(-1 * count):
             want.append(Toss(val,'r'))
 
     # Pair elements from have and want and insert them into ret at the
     # appropriate location
-    for i in range (len(A[0])):
+    for i in range(len(A[0])):
         temp = Toss(A[0][i], 'l')
         if temp in have:
             ret[A[0][i]/2 + throws_needed][0].append(want[counter_want] - temp)
             counter_want += 1
-    for i in range (len(A[1])):
+    for i in range(len(A[1])):
         temp = Toss(A[1][i], 'r')
         if temp in have:
             ret[A[1][i]/2 + throws_needed][1].append(want[counter_want] - temp)
             counter_want += 1
 
     # Put zeros in all empty spots
-    for i in range (len(ret)):
-        for j in range (len(ret[i])):
+    for i in range(len(ret)):
+        for j in range(len(ret[i])):
             if ret[i][j] == []:
                 ret[i][j] = [Toss(0,' ')]
 
@@ -428,31 +430,31 @@ def transition_from_async(A, B):
     cA0.subtract(Counter(B[0]))
     cA1.subtract(Counter(B[1]))
     for val,count in cA0.items():
-        for i in range (count):
+        for i in range(count):
             have.append(Toss(val,'l'))
-        for i in range (-1 * count):
+        for i in range(-1 * count):
             want.append(Toss(val,'l'))
     for val,count in cA1.items():
-        for i in range (count):
+        for i in range(count):
             have.append(Toss(val,'r'))
-        for i in range (-1 * count):
+        for i in range(-1 * count):
             want.append(Toss(val,'r'))
 
     # Pair elements from have and want and insert them into ret at the
     # appropriate location
-    for i in range (len(A[0])):
+    for i in range(len(A[0])):
         temp = Toss(A[0][i], 'l')
         if temp in have:
             ret[A[0][i]+throws_needed].append(want[counter_want] - temp)
             counter_want += 1
-    for i in range (len(A[1])):
+    for i in range(len(A[1])):
         temp = Toss(A[1][i], 'r')
         if temp in have:
             ret[A[1][i]+throws_needed].append(want[counter_want] - temp)
             counter_want += 1
 
     # Put zeros in all empty spots
-    for i in range (len(ret)):
+    for i in range(len(ret)):
         if ret[i] == []:
             ret[i] = [Toss(0,' ')]
 
