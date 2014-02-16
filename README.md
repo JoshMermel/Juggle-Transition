@@ -33,6 +33,8 @@ to make it more conscise.
 
 To Do list for Juggle-Transition:
  - doccument data structures
+ - figure out the difference between range and xrange and decide which I should
+   be using where
  - have more helpful print messages
  - detect and intercept output where jugglinglab will derp
  - transition_from_* using 'l' and 'r' is bad.  
