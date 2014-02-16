@@ -491,10 +491,10 @@ def same_num_balls(input1):
 # returns a siteswap
 def get_input(message, testlist, errorlist):
     try:
-        input1 = raw_input(message)
+        user_input = raw_input(message)
     except EOFError:
         sys.exit(1)
-    siteswap = parser.parse(input1)
+    siteswap = parser.parse(user_input)
     for i in range(len(testlist)):
         if not testlist[i](siteswap):
             print errorlist[i]
