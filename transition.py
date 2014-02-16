@@ -126,7 +126,7 @@ def p_Xthrow(p):
 
 # Error rule for syntax errors
 def p_error(p):
-    print 'Error during parsing, please try again'
+    print 'Error during parsing, please try again:',
 
 # Build the parser
 parser = yacc.yacc()
@@ -482,44 +482,37 @@ def get_transition(state1, state2, type1, type2):
 #                                     main                                     #
 ################################################################################
 
-# Get first siteswap
-try:
-    input1 = raw_input('please enter the first pattern:\n')
-except EOFError:
-    sys.exit(1)
-siteswap1 = parser.parse(input1)
-while siteswap1 == None or not verify(siteswap1):
-    message = 'invalid pattern, try again: \n'
-    if siteswap1 == None:
-        message = ''
+def not_none(i):
+    return i != None
+
+def same_num_balls(input1):
+    return lambda x : get_num_balls(x) == get_num_balls(input1)
+
+# returns a siteswap
+def get_input(message, testlist, errorlist):
     try:
         input1 = raw_input(message)
     except EOFError:
         sys.exit(1)
-    siteswap1 = parser.parse(input1)
+    siteswap = parser.parse(input1)
+    for i in range(len(testlist)):
+        if not testlist[i](siteswap):
+            print errorlist[i]
+            get_input('', testlist, errorlist)
+    return siteswap
+
+testlist = [not_none, verify]
+errorlist = ['','Invalid pattern, please try again:']
+
+# get the first pattern
+siteswap1 = get_input('Please enter the first pattern:\n',testlist, errorlist)
 state1 = get_state(siteswap1)
 type1 = siteswap_type(siteswap1)
 
-# Get second siteswap
-try:
-    input2 = raw_input('please enter the second pattern:\n')
-except EOFError:
-    sys.exit(1)
-siteswap2 = parser.parse(input2)
-while siteswap2 == None or \
-      not verify(siteswap2) or \
-      get_num_balls(siteswap1) != get_num_balls(siteswap2):
-    if siteswap2 == None:
-       message = ''
-    elif not verify(siteswap2):
-        message = 'invalid pattern, try again\n'
-    else:
-        message = 'patterns must have the same number of balls\n'
-    try:
-        input2 = raw_input(message)
-    except EOFError:
-        sys.exit(1)
-    siteswap2 = parser.parse(input2)
+#get the second pattern
+testlist.append(same_num_balls(siteswap1))
+errorlist.append('Patterns must have the same number of balls:')
+siteswap2 = get_input('Please enter the second pattern:\n',testlist, errorlist)
 state2 = get_state(siteswap2)
 type2 = siteswap_type(siteswap2)
 

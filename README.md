@@ -35,9 +35,6 @@ To Do list for Juggle-Transition:
  - doccument data structures
  - have more helpful print messages
  - detect and intercept output where jugglinglab will derp
- - Modularize the input
-   - take input and calls itself until a passed in list of boolean functions are all passed?
-   - is ths possible in python?
  - transition_from_* using 'l' and 'r' is bad.  
     - Why did I even do that?
         
