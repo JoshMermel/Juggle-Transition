@@ -32,13 +32,12 @@ appologize if I have made something more difficult to understand in my attempts
 to make it more conscise.
 
 To Do list for Juggle-Transition:
+ - improve first_throw()?
  - doccument data structures
  - figure out the difference between range and xrange and decide which I should
    be using where
  - have more helpful print messages
  - detect and intercept output where jugglinglab will derp
- - transition_from_* using 'l' and 'r' is bad.  
-    - Why did I even do that?
         
 Longer term possible features:
  - find equivalent transitions to existing ones?
