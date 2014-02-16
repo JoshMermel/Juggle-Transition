@@ -249,9 +249,8 @@ def async_get_state(siteswap):
 
     return ret
 
-# confusingly, state_len indexes the write position in ret, not the read
-# position in siteswap.  I forgot they were the same when first writing this
-# and haven't refactored yet
+# state_len indexes the write position in ret, not the read position in
+# siteswap.
 def sync_get_state(siteswap):
     to_place = sync_num_balls(siteswap)
     state = [Counter(), Counter()]
@@ -274,14 +273,11 @@ def sync_get_state(siteswap):
         state_len += 2
 
     ret = [[],[]]
-    for num,multiplicity in state[0].items():
-        if num < state_len:
-            for i in range(multiplicity):
-                ret[0].append(num)
-    for num,multiplicity in state[1].items():
-        if num < state_len:
-            for i in range(multiplicity):
-                ret[1].append(num)
+    for i in range(1) # for both left and right
+        for num,multiplicity in state[i].items():
+            if num < state_len:
+                for _ in range(multiplicity):
+                    ret[i].append(num)
 
     return ret
 
