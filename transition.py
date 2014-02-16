@@ -148,7 +148,6 @@ def verify(siteswap):
 
 def sync_verify(siteswap):
     # Check that all numbers are even and that 0x doesn't appear
-    print siteswap
     for i in range (len(siteswap)):
         for j in range (len(siteswap[i])):
             for k in range (len(siteswap[i][j])):
