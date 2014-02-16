@@ -300,7 +300,7 @@ def no_conflict(state1, state2):
     return (sub_no_conflict(state1[0], state2[0]) and 
             sub_no_conflict(state1[1], state2[1]))
 
-# Determines which hand has the first throw of a sequence
+# Determines which hand of an async drop state has the first throw
 def first_throw(state):
     if state[0] == []:
         if state[1] == []:
@@ -311,7 +311,7 @@ def first_throw(state):
         return 'left'
     return 'right'
 
-# Determines which hand has the last throw of a sequence
+# Determines which hand of an async drop state has the last throw
 def last_throw(state):
     if max(state[0]) > max(state[1]):
         return 'left'
