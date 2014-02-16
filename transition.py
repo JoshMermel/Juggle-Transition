@@ -49,9 +49,6 @@ def t_NUMBER(t):
 
 # Error handling rule for unrecognized characters
 def t_error(t):
-    # print "Illegal character '%s'" % t.value[0]
-    # Error message removed since p_error is called in this case anyway and
-    # users don't need two errors.
     t.lexer.skip(1)
 
 # Build the lexer
@@ -221,8 +218,6 @@ def sync_num_balls(siteswap):
     return total/(2*len(siteswap))
 
 ### extracting state ###
-# These functions are frankly bad but appear to work.  They are at the top of
-# my list for when I refactor stuff.
 def get_state(siteswap):
     if siteswap_type(siteswap) == 'sync':
         return sync_get_state(siteswap)
@@ -249,8 +244,7 @@ def async_get_state(siteswap):
 
     return ret
 
-# state_len indexes the write position in ret, not the read position in
-# siteswap.
+# state_len indexes write position in ret, not the read position in siteswap.
 def sync_get_state(siteswap):
     to_place = sync_num_balls(siteswap)
     state = [Counter(), Counter()]
@@ -306,7 +300,7 @@ def no_conflict(state1, state2):
     return (sub_no_conflict(state1[0], state2[0]) and 
             sub_no_conflict(state1[1], state2[1]))
 
-# horrible temporary solution
+# Determines which hand has the first throw of a sequence
 def first_throw(state):
     if state[0] == []:
         if state[1] == []:
@@ -317,14 +311,13 @@ def first_throw(state):
         return 'left'
     return 'right'
 
-
-# horrible temporary solution
+# Determines which hand has the last throw of a sequence
 def last_throw(state):
     if max(state[0]) > max(state[1]):
         return 'left'
     return 'right'
 
-### Converting siteswaps to strings for printing ###
+### Building strings out of siteswaps for printing ###
 def pretty_str_multi(siteswap):
     if len(siteswap) == 1:
         return str(siteswap[0])
@@ -486,7 +479,9 @@ def not_none(i):
 def same_num_balls(input1):
     return lambda x : get_num_balls(x) == get_num_balls(input1)
 
-# returns a siteswap
+# Takes a message to print, a list of functions to test input against, and a
+# parallel list of messages to print for each test if it is failed.  Returns a
+# siteswap
 def get_input(message, testlist, errorlist):
     try:
         user_input = raw_input(message)
