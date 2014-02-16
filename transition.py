@@ -185,16 +185,14 @@ def async_verify(siteswap):
                 return False
 
     # Build the countdown list
-    countdown = [];
-    for i in range (len(siteswap)):
-        countdown.append(0);
+    countdown = Counter();
     for i in range (len(siteswap)):
         for j in range (len(siteswap[i])):
             countdown[(siteswap[i][j].val+i) % len(siteswap)] += 1;
 
     # Verify the countdown list is as expected
-    for i in range (len(countdown)):
-        if countdown[i] != len(siteswap[i]):
+    for height, multiplicity in countdown.items():
+        if multiplicity != len(siteswap[height]):
             return False;
     return True;
 
