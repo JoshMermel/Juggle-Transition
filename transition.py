@@ -148,6 +148,7 @@ def verify(siteswap):
 
 def sync_verify(siteswap):
     # Check that all numbers are even and that 0x doesn't appear
+    print siteswap
     for i in range (len(siteswap)):
         for j in range (len(siteswap[i])):
             for k in range (len(siteswap[i][j])):
@@ -163,13 +164,13 @@ def sync_verify(siteswap):
         countdown[1].append(0)
     for i in range (len(siteswap)):
         for j in range (len(siteswap[i][0])):
-            val1 = siteswap[i][0][j].location(i, len(siteswap), False)
-            side = 0 if val1.cross == 'l' else 1
-            countdown[side][val1.val] += 1
+            desitnation = siteswap[i][0][j].location(i, len(siteswap), False)
+            side = 0 if desitnation.cross == 'l' else 1
+            countdown[side][desitnation.val] += 1
         for j in range (len(siteswap[i][1])):
-            val2 = siteswap[i][1][j].location(i, len(siteswap), True)
-            side = 0 if val2.cross == 'l' else 1
-            countdown[side][val2.val] += 1
+            desitnation = siteswap[i][1][j].location(i, len(siteswap), True)
+            side = 0 if desitnation.cross == 'l' else 1
+            countdown[side][desitnation.val] += 1
 
     # Verify the countdown list is as expected
     for i in range (len(countdown[0])):
@@ -311,7 +312,8 @@ def sub_no_conflict(state1, state2):
 # Checks that there is no conflict in the left or right halves of a state
 # Here states are a pair of lists
 def no_conflict(state1, state2):
-    return sub_no_conflict(state1[0], state2[0]) and sub_no_conflict(state1[1], state2[1])
+    return (sub_no_conflict(state1[0], state2[0]) and 
+            sub_no_conflict(state1[1], state2[1]))
 
 # horrible temporary solution
 def first_throw(state):
@@ -390,7 +392,8 @@ def transition_from_sync(A, B):
         for i in range (-1 * count):
             want.append(Toss(val,'r'))
 
-    # Pair elements from have and want and insert them into ret at the appropriate location
+    # Pair elements from have and want and insert them into ret at the
+    # appropriate location
     for i in range (len(A[0])):
         temp = Toss(A[0][i], 'l')
         if temp in have:
@@ -442,7 +445,8 @@ def transition_from_async(A, B):
         for i in range (-1 * count):
             want.append(Toss(val,'r'))
 
-    # Pair elements from have and want and insert them into ret at the appropriate location
+    # Pair elements from have and want and insert them into ret at the
+    # appropriate location
     for i in range (len(A[0])):
         temp = Toss(A[0][i], 'l')
         if temp in have:
