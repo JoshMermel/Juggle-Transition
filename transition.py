@@ -228,8 +228,7 @@ def get_state(siteswap):
 
 def async_get_state(siteswap):
     state = Counter();
-    num_balls = async_num_balls(siteswap)
-    to_place = num_balls
+    to_place = async_num_balls(siteswap)
     state_len = 0;
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
@@ -252,9 +251,8 @@ def async_get_state(siteswap):
 # position in siteswap.  I forgot they were the same when first writing this
 # and haven't refactored yet
 def sync_get_state(siteswap):
-    num_balls = sync_num_balls(siteswap)
+    to_place = sync_num_balls(siteswap)
     state = [Counter(), Counter()]
-    to_place = num_balls
     state_len = 0;
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
