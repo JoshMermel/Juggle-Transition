@@ -30,7 +30,6 @@ To Do list for Juggle-Transition:
  - doccument data structures
  - have more helpful print messages
  - detect and intercept output where jugglinglab will derp
- - replace countdown lists in verification function with countdown counters?
  - Modularize the input
    - take input and calls itself until a passed in list of boolean functions are all passed?
    - is ths possible in python?
