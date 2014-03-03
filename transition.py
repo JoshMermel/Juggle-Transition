@@ -267,7 +267,7 @@ def sync_get_state(siteswap):
         state_len += 2
 
     ret = [[],[]]
-    for i in range(1) # for both left and right
+    for i in range(1): # for both left and right
         for num,multiplicity in state[i].items():
             if num < state_len:
                 for _ in range(multiplicity):
