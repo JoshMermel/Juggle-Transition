@@ -494,7 +494,7 @@ def get_input(message, testlist, errorlist):
     for i in range(len(testlist)):
         if not testlist[i](siteswap):
             print errorlist[i]
-            get_input('', testlist, errorlist)
+            return get_input('', testlist, errorlist)
     return siteswap
 
 testlist = [not_none, verify]
