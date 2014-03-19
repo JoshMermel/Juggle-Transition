@@ -287,21 +287,32 @@ def flip_state(state):
 # Returns true if and only if every positive element in state1 appears in
 # state2 with at least the multiplicity
 # Here, states are lists
-def sub_no_conflict(state1, state2):
-   counterB = 0
-   for i in range(len(state1)):
-       if state1[i] >= 0:
-           try:
-               counterB += state2[counterB:].index(state1[i])
-           except ValueError:
-               return False
-   return True
+def search(x, v, startpos):
+    for i in range (startpos, len(v)):
+        if v[i] == x:
+            return i
+    return -1
 
-# Checks that there is no conflict in the left or right halves of a state
-# Here states are a pair of lists
+# Returns true if and only if every positive element in state1 appears in
+# state2 with at least the multiplicity
 def no_conflict(state1, state2):
-    return (sub_no_conflict(state1[0], state2[0]) and 
-            sub_no_conflict(state1[1], state2[1]))
+    state1L = state1[0]
+    state1R = state1[1]
+    state2L = state2[0]
+    state2R = state2[1]
+    counterB = 0
+    for i in range (0, len(state1L)):
+        if state1L[i] >= 0:
+            if search(state1L[i], state2L, counterB) == -1:
+                return False
+            counterB = search(state1L[i], state2L, counterB)+1;
+    counterB = 0
+    for i in range (0, len(state1R)):
+        if state1R[i] >= 0:
+            if search(state1R[i], state2R, counterB) == -1:
+                return False
+            counterB = search(state1R[i], state2R, counterB)+1;
+    return True
 
 # Determines which hand of an async drop state has the first throw
 def first_throw(state):
@@ -410,6 +421,10 @@ def transition_from_async(A, B):
         ret.append([])
     # If the lenght of the transition is more than the length of A, make sure
     # that left/right alignment is OK.
+    if first_throw(B) == last_throw(A):
+        A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
+        throws_needed += 1
+        ret.append([])       
     final_size = throws_needed
     counter_want = 0
 
