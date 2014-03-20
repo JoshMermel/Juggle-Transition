@@ -30,6 +30,38 @@ have tried my best to make readability a priority in the program but I
 appologize if I have made something more difficult to understand in my attempts
 to make it more conscise.
 
+## Examples
+
+### Async, Async
+    python transition.py 
+    Please enter the first pattern:
+    4
+    Please enter the second pattern:
+    741
+
+    To enter the second pattern on the left side, use
+    45
+    To enter the second pattern on the right side, use
+    5
+
+
+    python transition.py 
+    Please enter the first pattern:
+    741
+    Please enter the second pattern:
+    4
+
+    To enter the second pattern on the left side, use
+    34
+    To enter the second pattern on the right side, use
+    3
+
+And in fact, (4^4)5(741^2)3 is valid, as are the other three combinations
+
+### Sync, Sync
+
+### Async, Sync
+
 ##Data Structures
 
 ### Tosses
@@ -73,8 +105,7 @@ to make it more conscise.
  - Async siteswaps have state with all even numbers on one side and all odd number on the other
  - Sync siteswaps have state with all even numbers on both sides
 
-To Do list for Juggle-Transition:
- - further test behavior of the extra throw addition in transition_from_async()
+## To Do
  - improve siteswap_type()?
  - improve first_throw()?
  - consider shortening sync_verify() by consolidating similar code into a loop
