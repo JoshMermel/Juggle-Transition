@@ -38,11 +38,11 @@ t_RBRACE  = r'\]'
 t_STAR  = r'\*'
 def t_NUMBER(t):
     r'[0-9a-w]'
-    val = ord(t.value);
+    val = ord(t.value)
     if val >= ord('0') and val <= ord('9'):
-        t.value = val - ord('0');
+        t.value = val - ord('0')
     elif val >= ord('a') and val <= ord('z'):
-        t.value = val + 10 - ord('a');
+        t.value = val + 10 - ord('a')
     else:
         print 'error'
     return t
@@ -185,16 +185,16 @@ def async_verify(siteswap):
                 return False
 
     # Build the countdown list
-    countdown = Counter();
+    countdown = Counter()
     for i in range(len(siteswap)):
         for j in range(len(siteswap[i])):
-            countdown[(siteswap[i][j].val+i) % len(siteswap)] += 1;
+            countdown[(siteswap[i][j].val+i) % len(siteswap)] += 1
 
     # Verify the countdown list is as expected
     for height, multiplicity in countdown.items():
         if multiplicity != len(siteswap[height]):
-            return False;
-    return True;
+            return False
+    return True
 
 ### counting number of objects ###
 def get_num_balls(siteswap):
@@ -224,56 +224,60 @@ def get_state(siteswap):
         return sync_get_state(siteswap)
     return async_get_state(siteswap)
 
+# expects an async siteswap, returns its drop state
+# write_pos is the index we are handling in a given loop
+# stuff before write_pos is all correct, stuff after is still being modified
 def async_get_state(siteswap):
-    state = Counter();
+    state = Counter()
     to_place = async_num_balls(siteswap)
-    state_len = 0;
+    write_pos = 0
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
-        pos = state_len % len(siteswap) # position in the siteswap
+        pos = write_pos % len(siteswap) # position in the siteswap
         for i in range(len(siteswap[pos])):
-            state[state_len+siteswap[pos][i].val] += 1
-        state[state_len] = len(siteswap[pos]) - state[state_len]
-        to_place -= state[state_len]
-        state_len += 1
+            state[write_pos+siteswap[pos][i].val] += 1
+        state[write_pos] = len(siteswap[pos]) - state[write_pos]
+        to_place -= state[write_pos]
+        write_pos += 1
 
     ret = [[],[]]
     for num,multiplicity in state.items():
-        if num < state_len:
+        if num < write_pos:
             for i in range(multiplicity):
                 ret[num % 2].append(num)
 
     return ret
 
-# state_len indexes write position in ret, not the read position in siteswap.
+# write_pos indexes the front write position in ret
+# write_pos/2 indexes the read position is siteswap
 def sync_get_state(siteswap):
     to_place = sync_num_balls(siteswap)
     state = [Counter(), Counter()]
-    state_len = 0;
+    write_pos = 0
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
-        pos = (state_len/2) % len(siteswap) # index in the siteswap
+        pos = (write_pos/2) % len(siteswap) # index in the siteswap
         #left half of a (,)
         for i in range(len(siteswap[pos][0])):
             side = 1 if siteswap[pos][0][i].cross == 'x' else 0
-            state[side][state_len + (siteswap[pos][0][i].val)] += 1
+            state[side][write_pos + (siteswap[pos][0][i].val)] += 1
         #right half of a (,)
         for i in range(len(siteswap[pos][1])):
             side = 0 if siteswap[pos][1][i].cross == 'x' else 1
-            state[side][state_len + (siteswap[pos][1][i].val)] += 1
-        state[0][state_len] = len(siteswap[pos][0]) - state[0][state_len]
-        to_place -= state[0][state_len]
-        state[1][state_len] = len(siteswap[pos][1]) - state[1][state_len]
-        to_place -= state[1][state_len]
-        state_len += 2
+            state[side][write_pos + (siteswap[pos][1][i].val)] += 1
+        state[0][write_pos] = len(siteswap[pos][0]) - state[0][write_pos]
+        to_place -= state[0][write_pos]
+        state[1][write_pos] = len(siteswap[pos][1]) - state[1][write_pos]
+        to_place -= state[1][write_pos]
+        write_pos += 2
 
     ret = [[],[]]
     for num,multiplicity in state[0].items():
-        if num < state_len:
+        if num < write_pos:
             for i in range(multiplicity):
                 ret[0].append(num)
     for num,multiplicity in state[1].items():
-        if num < state_len:
+        if num < write_pos:
             for i in range(multiplicity):
                 ret[1].append(num)
 
