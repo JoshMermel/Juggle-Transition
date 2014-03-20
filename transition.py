@@ -354,6 +354,7 @@ def pretty_str(siteswap):
     return pretty_str_async(siteswap)
 
 ### Finding transitions ###
+# 
 def transition_from_sync(A, B):
     # Shift A back in time by the necessary number of throws
     throws_needed = 0
@@ -404,6 +405,8 @@ def transition_from_sync(A, B):
 
     print pretty_str_sync(ret)
 
+# Expects A to be the drop state of an async siteswap and B to be a drop state.
+# is_B_sync is a boolean that is true if B is sync.
 def transition_from_async(A, B, is_B_sync):
     # Shift A back in time by the necessary number of throws
     throws_needed = 0
@@ -415,8 +418,7 @@ def transition_from_async(A, B, is_B_sync):
     # If the lenght of the transition is more than the length of A, make sure
     # that left/right alignment is OK.
 
-    if first_throw(B) == last_throw(A) and all(x < 0 for x in A[0]+A[1]):
-        print "extra throw added$$$$$$$$" #DEBUG $$$
+    if first_throw(B) == last_throw(A) and all(x < 0 for x in A[0]+A[1]) and not is_B_sync:
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])       
@@ -465,14 +467,14 @@ def get_transition(state1, state2, type1, type2):
     print '\n',
     if type1 == 'async' and type2 == 'async':
         print 'To enter the second pattern on the left side, use'
-        transition_from_async(state1,state2, True)
+        transition_from_async(state1,state2, False)
         print 'To enter the second pattern on the right side, use'
-        transition_from_async(state1,flip_state(state2), True)
+        transition_from_async(state1,flip_state(state2), False)
     elif type1 == 'async' and type2 == 'sync':
         print 'If your last cycle began on the left side, use'
-        transition_from_async(state1, state2, False)
+        transition_from_async(state1, state2, True)
         print 'If you last cycle began on the right side, use'
-        transition_from_async(flip_state(state1), state2, False)
+        transition_from_async(flip_state(state1), state2, True)
     elif type1 == 'sync' and type2 == 'async':
         print 'To enter the second pattern on the left side, use'
         transition_from_sync(state1,state2)
