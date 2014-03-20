@@ -75,15 +75,12 @@ to make it more conscise.
 
 To Do list for Juggle-Transition:
  - further test behavior of the extra throw addition in transition_from_async()
- - rename state_len for better clarity
- - improve siteswap_type()
+ - improve siteswap_type()?
  - improve first_throw()?
  - consider shortening sync_verify() by consolidating similar code into a loop
     - pros: more concise, structure better matches async_verify
     - cons: possibly less readable
     - same question about sync_get_state()
- - figure out the difference between range and xrange and decide which I should
-   be using where
  - have more helpful print messages
  - detect and intercept output where jugglinglab will derp
         
