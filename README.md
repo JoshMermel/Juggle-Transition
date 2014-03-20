@@ -113,6 +113,19 @@ And in fact ((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4) is valid (http://jugglinglab.s
     To enter the second pattern on the right side, use
     (7x,a)(7x,6)(2x,0)
 
+This is where I complain slightly about poor documentation in jugglinglab on
+siteswaps mixing sync and async throws.
+
+ - (5^5)83x43x((6x,4)(4,6x)^2)(8,5x)(4,5x)* is valid in jugglinglab but isn't if
+   the number of 5's is even or if the star is removed
+ - (5^6)8x3x43x((6x,4)(4,6x)^2)(8,5x)(4,5x)* is valid in jugglinglab but isn't if
+   the number of 5's is even or if the star is removed
+ - (5^6)8x3x43x((6x,4)(4,6x)^2)(7x,a)(7x,6)(2x,0) is valid in jugglinglab but
+   isn't if the number of 5's is even or if a star is added
+ - (5^5)83x43x((6x,4)(4,6x)^2)(7x,a)(7x,6)(2x,0) is valid in jugglinglab but isn't
+   if the number of 5's is even or if a star is added.
+
+
 
 
 ##Data Structures
