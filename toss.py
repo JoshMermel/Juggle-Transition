@@ -24,6 +24,8 @@ class Toss:
             return "%s" % (num)
         else:
             return "%s%s" % (num, self.cross)
+    # this is meant to be used when finding transitions
+    # Tosses are expected to have a 'l' or 'r' as their cross
     def __sub__(self, other):
         val = self.val-other.val
         cross = 0 if self.cross == other.cross else 1
