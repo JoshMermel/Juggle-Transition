@@ -132,6 +132,7 @@ parser = yacc.yacc()
 #                                     math                                     #
 ################################################################################
 
+# todo: find a better way to do this?
 def siteswap_type(siteswap):
     if type(siteswap[0][0]).__name__ == 'instance':
         return 'async'
@@ -291,7 +292,6 @@ def sub_no_conflict(state1, state2):
    for i in range(len(state1)):
        if state1[i] >= 0:
            try:
-               #print counterB
                counterB += state2[counterB:].index(state1[i])+1
            except ValueError:
                return False
