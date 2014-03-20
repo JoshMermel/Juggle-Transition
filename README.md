@@ -60,7 +60,26 @@ And in fact, (4^4)5(741^2)3 is valid, as are the other three combinations
 
 ### Sync, Sync
 
+    python transition.py 
+    Please enter the first pattern:
+    (4,4)
+    Please enter the second pattern:
+    (6x,2x)*
+
+    (6,4)
+
+    python transition.py 
+    Please enter the first pattern:
+    (6x,2x)*
+    Please enter the second pattern:
+    (4,4)
+
+    (2,4)
+
+And in fact ((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4) is valid
+
 ### Async, Sync
+
 
 ##Data Structures
 
