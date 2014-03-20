@@ -287,7 +287,42 @@ have tried my best to make readability a priority in the program but I
 apologize if I have made something more difficult to understand in my attempts
 to make it more concise.
 
+The loops in async_get_state() and sync_get_state() are more confusing than I
+would like.  Right now they make good sense to me so I'll do my best to explain
+them here.  For simplicity I'll explain the async one and claim that the sync
+one works more or less the same.
 
+The key to understanding this loop is understanding the invariant of write_pos
+and state.  In state, indices less than write_pos represent how many balls must
+be added at that index to make the siteswap possible.  Indices greater than or
+equal to write_pos represent how many balls have already landed there due to
+throws before write_pos.  In each loop, we want to increment write_pos by one.
+The variable to_place lets us know when we can stop.  If we let this loop
+forever, state would hold the drop state followed by all 0s.
+
+
+    pos = write_pos % len(siteswap)
+
+Find the index of the throw in the siteswap which we are doing this beat.
+
+    for i in range(len(siteswap[pos])):
+        state[write_pos+siteswap[pos][i].val] += 1
+
+Increment all of the locations where a ball will land due to that throw.
+
+    state[write_pos] = len(siteswap[pos]) - state[write_pos]
+
+Replace the value at write_pos which currently represents the number of balls
+that have landed there with the number we need to add.
+
+    to_place -= state[write_pos]
+
+Update to_place to reflect the number of ball we have added.
+
+    write_pos += 1
+
+Increment write_pos, preserving the invariant.
+    
 ## Acknowledgements 
 
  - My thanks go out to Anschel Schaffer-Cohen and Professor Sam Guyer for
