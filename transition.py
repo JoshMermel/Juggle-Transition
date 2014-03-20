@@ -2,9 +2,6 @@
 # Given two valid siteswaps of the same number of objects, it finds a
 # transition between them.
 #
-# My thanks go out to Anschel Schaffer-Cohen and Professor Sam Guyer for
-# advising me on using grammar based parsing.
-#
 # For information on usage, please consult the included readme.
 
 import sys

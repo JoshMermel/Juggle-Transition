@@ -285,4 +285,12 @@ Longer term possible features:
  - make transition length a user selectable parameter?
 
 
+## Acknowledgements 
+
+ - My thanks go out to Anschel Schaffer-Cohen and Professor Sam Guyer for
+   advising me on using grammar based parsing.
+ - Although I hate on jugglinglab a bit, it is an extremely powerful tool and I
+   owe gratitude to Jack Boyce, its author as well as the Jongle7 team who did
+   the android version.  Without jugglinglab, Juggle-Transition would likely
+   not exist.
 
