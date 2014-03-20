@@ -110,7 +110,8 @@ And in fact all 4 combinations are valid.
 
     (2,4)
 
-And in fact ((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4) is valid (http://jugglinglab.sourceforge.net/siteswap.php?((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4))
+And in fact ((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4) is valid
+(http://jugglinglab.sourceforge.net/siteswap.php?((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4))
 
 ### Async, Sync
 
@@ -248,6 +249,7 @@ transition will grow by 2.
 
 ## To Do
  - more examples
+    - make gifs for my examples
  - test multiplex async->sync and sync->async more
  - improve siteswap_type()?
  - improve first_throw()?
