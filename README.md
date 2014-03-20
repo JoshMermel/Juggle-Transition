@@ -20,7 +20,7 @@ On first run it will need to generate parsing tables.  This should take at most 
 
 Juggle-Transition supports the following siteswap features:
  - async sequences
- - sync sequences (including *)
+ - sync sequences (including \*)
  - multiplexing in either sequence
 
   
@@ -67,6 +67,30 @@ to make it more conscise.
     3
 
 And in fact, (4^4)5(741^2)3 is valid (http://jugglinglab.sourceforge.net/siteswap.php?(4^4)5(741^2)3), as are the other three combinations
+
+    python transition.py 
+    Please enter the first pattern:
+    6
+    Please enter the second pattern:
+    [33]
+
+    To enter the second pattern on the left side, use
+    4542
+    To enter the second pattern on the right side, use
+    441
+
+    python transition.py 
+    Please enter the first pattern:
+    [33]
+    Please enter the second pattern:
+    6
+
+    To enter the second pattern on the left side, use
+    [48][68][43]0
+    To enter the second pattern on the right side, use
+    [46][46][61]
+
+And in fact all 4 combinations are valid.
 
 ### Sync, Sync
 
@@ -159,6 +183,22 @@ documentation on them I'll support them better in the future.
 
 ### Excessive examples because we can
 
+    python transition.py 
+    Please enter the first pattern:
+    b1
+    Please enter the second pattern:
+    b1
+
+    To enter the second pattern on the left side, use
+
+    To enter the second pattern on the right side, use
+    ab0b0b0b0
+
+In this example we transition from a 6 ball shower into a 6 ball shower.  If we
+want to enter the second on the left side then we don't need any transition.
+If we want to enter it on the right side though we need to do a pretty long
+transition.  For every ball you add to the shower, the length of this
+transition will grow by 2.
 
 ##Data Structures
 
@@ -204,6 +244,8 @@ documentation on them I'll support them better in the future.
  - Sync siteswaps have state with all even numbers on both sides
 
 ## To Do
+ - more examples
+ - test multiplex async->sync and sync->async more
  - improve siteswap_type()?
  - improve first_throw()?
  - consider shortening sync_verify() by consolidating similar code into a loop
@@ -215,6 +257,7 @@ documentation on them I'll support them better in the future.
         
 Longer term possible features:
  - find equivalent transitions to existing ones?
+    - potentially smaller, smooth existing transitions to have fewer 0's
  - make transition length a user selectable parameter?
 
 
