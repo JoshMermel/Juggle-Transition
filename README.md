@@ -1,7 +1,5 @@
 #Juggle-Transition
 
-## Disorganized thoughts
-
 A python program for finding transitions between juggling patterns
 
 Given two valid juggling sequences of the same number of balls,
@@ -10,7 +8,15 @@ find two transitions, one for starting the pattern on the left and the other
 for starting it on the right.  The transitions are suitable to be animated by
 jugglinglab.
 
+## Usage
+
+Juggle-Transition can be run with
+
+    python transition.py
+
 To use it, you will need ply, a lex-yacc package for python.  http://www.dabeaz.com/ply/ply.html
+
+On first run it will need to generate parsing tables.  This should take at most a few seconds.
 
 Juggle-Transition supports the following siteswap features:
  - async sequences
@@ -26,6 +32,8 @@ Juggle-Transition does not support the following jugglinglab features:
     - Note that Juggle-Transition will happily transition you between a sync
       pattern and an async pattern.  However it will not accept a pattern that
       includes both types of throws.
+
+## Disorganized thoughts
 
 In general, I find find myself inexplicably driven to shorten functions.  I
 have tried my best to make readability a priority in the program but I
