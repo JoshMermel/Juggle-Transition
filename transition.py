@@ -136,13 +136,15 @@ def siteswap_type(siteswap):
     return 'sync'
 
 ### verification ###
-# Expects siteswap to be a valid siteswap
+# Expects siteswap to be a well formed siteswap
+# Returns True if the siteswap is valid
 def verify(siteswap):
     if siteswap_type(siteswap) == 'sync':
         return sync_verify(siteswap)
     return async_verify(siteswap)
 
-# Expects siteswap to be a valid async siteswap
+# Expects siteswap to be a well formed async siteswap
+# Returns True if the siteswap is valid
 def async_verify(siteswap):
     # Check no x's appear
     for i in range(len(siteswap)):
@@ -162,7 +164,8 @@ def async_verify(siteswap):
             return False
     return True
 
-# Expects siteswap to be a valid sync siteswap
+# Expects siteswap to be a well formed sync siteswap
+# Returns True if the siteswap is valid
 def sync_verify(siteswap):
     # Check that all numbers are even and that 0x doesn't appear
     for i in range(len(siteswap)):
@@ -188,9 +191,11 @@ def sync_verify(siteswap):
             countdown[side][desitnation.val] += 1
 
     # Verify the countdown list is as expected
+    # left side
     for height, multiplicity in countdown[0].items():
         if multiplicity != len(siteswap[height][0]):
             return False
+    # right side
     for height, multiplicity in countdown[1].items():
         if multiplicity != len(siteswap[height][1]):
             return False
@@ -253,14 +258,15 @@ def async_get_state(siteswap):
 
 # Expects siteswap to be a valid sync siteswap
 # write_pos indexes the front write position in ret
-# write_pos/2 indexes the read position is siteswap
+# write_pos/2 % len(siteswap) indexes the read position is siteswap.  The /2 is
+# necessary because of the unwritten null beat after a sync throw.
 def sync_get_state(siteswap):
     to_place = sync_num_balls(siteswap)
     state = [Counter(), Counter()]
     write_pos = 0
     #sorry for the following loop, I swear it makes sense to me
     while to_place > 0:
-        pos = (write_pos/2) % len(siteswap) # index in the siteswap
+        pos = (write_pos/2) % len(siteswap) # read index in the siteswap
         #left half of a (,)
         for i in range(len(siteswap[pos][0])):
             side = 1 if siteswap[pos][0][i].cross == 'x' else 0
@@ -297,14 +303,16 @@ def flip_state(state):
 # state2 with at least the multiplicity
 # Here, states are lists
 def sub_no_conflict(state1, state2):
-   counterB = 0
+   check_from = 0
    for i in range(len(state1)):
        if state1[i] >= 0:
-           try:
-               counterB += state2[counterB:].index(state1[i])+1
-           except ValueError:
-               return False
-   return True
+            try:
+                # increment check_from so it starts looking after the most
+                # recently found value
+                check_from += state2[check_from:].index(state1[i])+1
+            except ValueError:
+                return False
+    return True
 
 # Checks that there is no conflict in the left or right halves of a state
 # Here states are a pair of lists
