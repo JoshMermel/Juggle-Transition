@@ -37,8 +37,8 @@ Juggle-Transition does not support the following jugglinglab features:
 
 In general, I find find myself inexplicably driven to shorten functions.  I
 have tried my best to make readability a priority in the program but I
-appologize if I have made something more difficult to understand in my attempts
-to make it more conscise.
+apologize if I have made something more difficult to understand in my attempts
+to make it more concise.
 
 ## Examples
 
@@ -182,6 +182,9 @@ I apologize for my mediocre support of them.  Maybe if someone gets me good
 documentation on them I'll support them better in the future.
 
 ### Excessive examples because we can
+
+Because the whole point of this program was that it could scale to arbitrarily
+complicated and large siteswaps
 
     python transition.py 
     Please enter the first pattern:
