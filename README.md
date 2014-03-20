@@ -36,13 +36,6 @@ Juggle-Transition does not support the following jugglinglab features:
       pattern and an async pattern.  However it will not accept a pattern that
       includes both types of throws.
 
-## Disorganized thoughts
-
-In general, I find find myself inexplicably driven to shorten functions.  I
-have tried my best to make readability a priority in the program but I
-apologize if I have made something more difficult to understand in my attempts
-to make it more concise.
-
 ## Examples
 
 ### Async, Async
@@ -269,6 +262,7 @@ transition will grow by 2.
 ## To Do
  - more examples
     - make gifs for my examples
+        - jugglinglab claims it does that but the feature seems broken?
  - test multiplex async->sync and sync->async more
  - improve siteswap_type()?
  - improve first_throw()?
@@ -283,6 +277,13 @@ Longer term possible features:
  - find equivalent transitions to existing ones?
     - potentially smaller, smooth existing transitions to have fewer 0's
  - make transition length a user selectable parameter?
+
+## Disorganized thoughts
+
+In general, I find find myself inexplicably driven to shorten functions.  I
+have tried my best to make readability a priority in the program but I
+apologize if I have made something more difficult to understand in my attempts
+to make it more concise.
 
 
 ## Acknowledgements 
