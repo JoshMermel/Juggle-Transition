@@ -20,6 +20,8 @@ http://www.dabeaz.com/ply/ply.html
 On first run it will need to generate parsing tables.  This should take at most
 a few seconds.
 
+## Features
+
 Juggle-Transition supports the following siteswap features:
  - async sequences
  - sync sequences (including \*)
