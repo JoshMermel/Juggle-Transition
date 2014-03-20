@@ -1,5 +1,7 @@
 #Juggle-Transition
 
+## Disorganized thoughts
+
 A python program for finding transitions between juggling patterns
 
 Given two valid juggling sequences of the same number of balls,
@@ -56,7 +58,9 @@ to make it more conscise.
     To enter the second pattern on the right side, use
     3
 
-And in fact, (4^4)5(741^2)3 is valid, as are the other three combinations
+And in fact,
+[(4^4)5(741^2)3](jugglinglab.sourceforge.net/siteswap.php?\(4^4)5\(741^2\)3) is
+valid, as are the other three combinations
 
 ### Sync, Sync
 
@@ -76,16 +80,40 @@ And in fact, (4^4)5(741^2)3 is valid, as are the other three combinations
 
     (2,4)
 
-And in fact ((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4) is valid
+And in fact [((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4)](jugglinglab.sourceforge.net/siteswap.php?\(\(4,4)^4)\(6,4)\(\(6x,2x)\(2x,6x)^3)\(2,4\)) is valid
 
 ### Async, Sync
+
+    python transition.py 
+    Please enter the first pattern:
+    5
+    Please enter the second pattern:
+    (6x,4)*
+
+    If your last cycle began on the left side, use
+    83x43x
+    If you last cycle began on the right side, use
+    8x3x43x
+
+
+    python transition.py 
+    Please enter the first pattern:
+    (6x,4)*
+    Please enter the second pattern:
+    5
+
+    To enter the second pattern on the left side, use
+    (8,5x)(4,5x)
+    To enter the second pattern on the right side, use
+    (7x,a)(7x,6)(2x,0)
+
 
 
 ##Data Structures
 
 ### Tosses
  - A toss contains an int and a char
- - We abuse them when finding transitions but this part of the doccumentation doesn't concern that
+ - We abuse them when finding transitions but this part of the documentation doesn't concern that
  - When the char is a space, it represents a throw whose height is the integer.
  - When the char is an 'x', it represents a throw whose height is the integer followed by an 'x'
  - for example
