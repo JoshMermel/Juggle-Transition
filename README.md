@@ -125,7 +125,33 @@ siteswaps mixing sync and async throws.
  - (5^5)83x43x((6x,4)(4,6x)^2)(7x,a)(7x,6)(2x,0) is valid in jugglinglab but isn't
    if the number of 5's is even or if a star is added.
 
+As you can see, for each pair of transitions between 5 and (6x,4)\* there is a
+way to make jugglinglab like that transition.  I've yet to figure out exactly
+how except by brute force though.  If you are using Juggle-Transition to find
+transitions between sync and async siteswaps and want to animate them with
+jugglinglab then your best be is to try repeating the async segment an even/odd
+number of times and adding/not adding a star.  The problem with this is that if
+the async siteswap has even length, you are stuck for example.
 
+    (4,4) -> 71
+    To enter the second pattern on the left side, use
+    (4,7x)(3,7x)
+    To enter the second pattern on the right side, use
+    (5x,9)(5x,2)
+
+    71 -> (4,4)
+    If your last cycle began on the left side, use
+    3x4x0
+    If you last cycle began on the right side, use
+    5x2x0
+
+ - Transitions using (5x,9)(5x,2) work with both 3x4x0 and 5x2x0 with or
+   without a star and no matter how many times 71 appears.
+ - Transitions using (4,7x)(3,7x) do not work with 3x4x0 or with 5x2x0 with or
+   without a star and no matter how many times 71 appears.
+
+I claim that my solutions are good and jugglinglab is in the wrong here.  Maybe
+later I'll justify that argument more.
 
 
 ##Data Structures
