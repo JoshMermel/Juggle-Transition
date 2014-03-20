@@ -64,9 +64,10 @@ to make it more conscise.
  - for example:
     - The state of a 3 ball ground state trick such as 3 or 531 is [[0, 2], [1]]
     - The state of 741 is [[0,2,4],[1]]
-    - The state of (4,4) is [[0,2],[0,2]]
     - The state of 23[34] is [[0,2],[1,3]] \(4 ball ground state\)
     - The state of 3[34]2 is [[0,2],[1,1]]
+    - The state of (4,4) is [[0,2],[0,2]]
+    - The state of (6x,2x)(2x,6x) is [[0,4],[0,2]]
  - Async siteswaps have state with all even numbers on one side and all odd number on the other
  - Sync siteswaps have state with all even numbers on both sides
 
@@ -79,7 +80,6 @@ To Do list for Juggle-Transition:
     - pros: more concise, structure better matches async_verify
     - cons: possibly less readable
     - same question about sync_get_state()
- - doccument data structures
  - figure out the difference between range and xrange and decide which I should
    be using where
  - have more helpful print messages
