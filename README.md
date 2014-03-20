@@ -153,6 +153,12 @@ the async siteswap has even length, you are stuck for example.
 I claim that my solutions are good and jugglinglab is in the wrong here.  Maybe
 later I'll justify that argument more.
 
+In general though, transitions between sync and async are poorly documented so
+I apologize for my mediocre support of them.  Maybe if someone gets me good
+documentation on them I'll support them better in the future.
+
+### Excessive examples because we can
+
 
 ##Data Structures
 
