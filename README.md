@@ -37,7 +37,9 @@ to make it more conscise.
  - We abuse them when finding transitions but this part of the doccumentation doesn't concern that
  - When the char is a space, it represents a throw whose height is the integer.
  - When the char is an 'x', it represents a throw whose height is the integer followed by an 'x'
-    - for example, a 6x is represented by Toss(6, 'x').  A 4 is represented by a Toss(4, ' ')
+ - for example
+    - a 6x is represented by Toss(6, 'x')
+    - A 4 is represented by a Toss(4, ' ')
 
 ### Siteswaps
  - To get a siteswap, call the parse() function on the string representation of a siteswap
