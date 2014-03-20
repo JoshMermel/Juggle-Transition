@@ -59,7 +59,7 @@ to make it more conscise.
     3
 
 And in fact,
-[(4^4)5(741^2)3](jugglinglab.sourceforge.net/siteswap.php?\(4^4)5\(741^2\)3) is
+[(4^4)5\(741^2\)3](jugglinglab.sourceforge.net/siteswap.php?\(4^4)5\(741^2\)3) is
 valid, as are the other three combinations
 
 ### Sync, Sync
@@ -80,7 +80,7 @@ valid, as are the other three combinations
 
     (2,4)
 
-And in fact [((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4)](jugglinglab.sourceforge.net/siteswap.php?\(\(4,4)^4)\(6,4)\(\(6x,2x)\(2x,6x)^3)\(2,4\)) is valid
+And in fact [((4,4)^4)(6,4)((6x,2x)(2x,6x)^3)(2,4)](jugglinglab.sourceforge.net/siteswap.php?\(\(4,4\)^4\)\(6,4)\(\(6x,2x)\(2x,6x)^3)\(2,4\)) is valid
 
 ### Async, Sync
 
