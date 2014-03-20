@@ -411,7 +411,7 @@ def transition_from_async(A, B):
     # If the lenght of the transition is more than the length of A, make sure
     # that left/right alignment is OK.
 
-    if first_throw(B) == last_throw(A) and not any(x >= 0 for x in A[0]+A[1]):
+    if first_throw(B) == last_throw(A) and all(x < 0 for x in A[0]+A[1]):
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])       
