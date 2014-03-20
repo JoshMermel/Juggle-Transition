@@ -404,7 +404,7 @@ def transition_from_sync(A, B):
 
     print pretty_str_sync(ret)
 
-def transition_from_async(A, B):
+def transition_from_async(A, B, is_B_sync):
     # Shift A back in time by the necessary number of throws
     throws_needed = 0
     ret = []
@@ -416,6 +416,7 @@ def transition_from_async(A, B):
     # that left/right alignment is OK.
 
     if first_throw(B) == last_throw(A) and all(x < 0 for x in A[0]+A[1]):
+        print "extra throw added$$$$$$$$" #DEBUG $$$
         A = (map(lambda x: x-1 , A[0]), map(lambda x: x-1 , A[1]))
         throws_needed += 1
         ret.append([])       
@@ -464,14 +465,14 @@ def get_transition(state1, state2, type1, type2):
     print '\n',
     if type1 == 'async' and type2 == 'async':
         print 'To enter the second pattern on the left side, use'
-        transition_from_async(state1,state2)
+        transition_from_async(state1,state2, True)
         print 'To enter the second pattern on the right side, use'
-        transition_from_async(state1,flip_state(state2))
+        transition_from_async(state1,flip_state(state2), True)
     elif type1 == 'async' and type2 == 'sync':
         print 'If your last cycle began on the left side, use'
-        transition_from_async(state1, state2)
+        transition_from_async(state1, state2, False)
         print 'If you last cycle began on the right side, use'
-        transition_from_async(flip_state(state1), state2)
+        transition_from_async(flip_state(state1), state2, False)
     elif type1 == 'sync' and type2 == 'async':
         print 'To enter the second pattern on the left side, use'
         transition_from_sync(state1,state2)
