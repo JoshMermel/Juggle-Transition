@@ -139,11 +139,33 @@ def siteswap_type(siteswap):
     return 'sync'
 
 ### verification ###
+# Expects siteswap to be a valid siteswap
 def verify(siteswap):
     if siteswap_type(siteswap) == 'sync':
         return sync_verify(siteswap)
     return async_verify(siteswap)
 
+# Expects siteswap to be a valid async siteswap
+def async_verify(siteswap):
+    # Check no x's appear
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i])):
+            if siteswap[i][j].cross == 'x':
+                return False
+
+    # Build the countdown list
+    countdown = Counter()
+    for i in range(len(siteswap)):
+        for j in range(len(siteswap[i])):
+            countdown[(siteswap[i][j].val+i) % len(siteswap)] += 1
+
+    # Verify the countdown list is as expected
+    for height, multiplicity in countdown.items():
+        if multiplicity != len(siteswap[height]):
+            return False
+    return True
+
+# Expects siteswap to be a valid sync siteswap
 def sync_verify(siteswap):
     # Check that all numbers are even and that 0x doesn't appear
     for i in range(len(siteswap)):
@@ -177,31 +199,14 @@ def sync_verify(siteswap):
             return False
     return True
 
-def async_verify(siteswap):
-    # Check no x's appear
-    for i in range(len(siteswap)):
-        for j in range(len(siteswap[i])):
-            if siteswap[i][j].cross == 'x':
-                return False
-
-    # Build the countdown list
-    countdown = Counter()
-    for i in range(len(siteswap)):
-        for j in range(len(siteswap[i])):
-            countdown[(siteswap[i][j].val+i) % len(siteswap)] += 1
-
-    # Verify the countdown list is as expected
-    for height, multiplicity in countdown.items():
-        if multiplicity != len(siteswap[height]):
-            return False
-    return True
-
 ### counting number of objects ###
+# Expects siteswap to be a valid siteswap
 def get_num_balls(siteswap):
     if siteswap_type(siteswap) == 'sync':
         return sync_num_balls(siteswap)
     return async_num_balls(siteswap)
 
+# Expects siteswap to be a valid async siteswap
 def async_num_balls(siteswap):
     total = 0
     for i in range(len(siteswap)):
@@ -209,6 +214,7 @@ def async_num_balls(siteswap):
             total += siteswap[i][j].val
     return total/len(siteswap)
 
+# Expects siteswap to be a valid sync siteswap
 def sync_num_balls(siteswap):
     total = 0
     for i in range(len(siteswap)):
@@ -224,7 +230,7 @@ def get_state(siteswap):
         return sync_get_state(siteswap)
     return async_get_state(siteswap)
 
-# expects an async siteswap, returns its drop state
+# Expects siteswap to be a valid async siteswap
 # write_pos is the index we are handling in a given loop
 # stuff before write_pos is all correct, stuff after is still being modified
 def async_get_state(siteswap):
@@ -248,6 +254,7 @@ def async_get_state(siteswap):
 
     return ret
 
+# Expects siteswap to be a valid sync siteswap
 # write_pos indexes the front write position in ret
 # write_pos/2 indexes the read position is siteswap
 def sync_get_state(siteswap):
@@ -283,7 +290,8 @@ def sync_get_state(siteswap):
 
     return ret
 
-# Expects an async siteswap; switches which hand has the starting throw
+# Expects an async siteswap
+# switches which hand has the starting throw
 def flip_state(state):
     return (state[1], state[0])
 
@@ -354,7 +362,8 @@ def pretty_str(siteswap):
     return pretty_str_async(siteswap)
 
 ### Finding transitions ###
-# 
+# Expects A to be the drop state of a sync siteswap
+# Expects B to a valid drop state
 def transition_from_sync(A, B):
     # Shift A back in time by the necessary number of throws
     throws_needed = 0
@@ -463,6 +472,8 @@ def transition_from_async(A, B, is_B_sync):
 
     print pretty_str_async(ret)
 
+# Expects state1 and state 2 to be valid drop states
+# Expects type1 and type2 to be the types associtated with state1 and state2
 def get_transition(state1, state2, type1, type2):
     print '\n',
     if type1 == 'async' and type2 == 'async':
