@@ -240,6 +240,39 @@ excited state sync pattern.  In fact,
 are all valid siteswaps.
 
 
+    python transition.py 
+    Please enter the first pattern:
+    97531
+    Please enter the second pattern:
+    13579
+
+    To enter the second pattern on the left side, use
+    c646
+    To enter the second pattern on the right side, use
+    8c841
+
+
+    python transition.py 
+    Please enter the first pattern:
+    13579
+    Please enter the second pattern:
+    97531
+
+    To enter the second pattern on the left side, use
+    4044
+    To enter the second pattern on the right side, use
+    60560
+
+Here we are transitioning between two patterns which seem very similar but are
+actually pretty different.  Again, all 4 listed combination
+
+ * (97531^2)c646(13579^2)4044
+ * (97531^2)c646(13579^2)60560
+ * (97531^2)8c841(13579^2)4044
+ * (97531^2)8c841(13579^2)60560
+
+are valid
+
 ##Data Structures
 
 ### Tosses
