@@ -236,6 +236,7 @@ excited state sync pattern.  In fact,
  * (77470^3)3x63x((6,6)(6x,2x)(6x,4x)^2)(6,7x)(6,7x)(0,7x)\* 
  * (77470^2)5x2x5x((6,6)(6x,2x)(6x,4x)^2)(6,7x)(6,7x)(0,7x)\*
  * (77470^2)5x2x5x((6,6)(6x,2x)(6x,4x)^2)(5x,9)(5x,4)
+
 are all valid siteswaps.
 
 
