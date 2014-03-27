@@ -206,6 +206,38 @@ If we want to enter it on the right side though we need to do a pretty long
 transition.  For every ball you add to the shower, the length of this
 transition will grow by 2.
 
+
+    python transition.py 
+    Please enter the first pattern:
+    77470
+    Please enter the second pattern:
+    (6,6)(6x,2x)(6x,4x)
+
+    If your last cycle began on the left side, use
+    3x63x
+    If you last cycle began on the right side, use
+    5x2x5x
+
+
+    python transition.py 
+    Please enter the first pattern:
+    (6,6)(6x,2x)(6x,4x)
+    Please enter the second pattern
+    77470
+
+    To enter the second pattern on the left side, use
+    (6,7x)(6,7x)(0,7x)
+    To enter the second pattern on the right side, use
+    (5x,9)(5x,4)
+
+Here we are transitioning between a 5 ball excited state async patter and excited state sync pattern.  In fact, 
+ * (77470^3)3x63x((6,6)(6x,2x)(6x,4x)^2)(5x,9)(5x,4)
+ * (77470^3)3x63x((6,6)(6x,2x)(6x,4x)^2)(6,7x)(6,7x)(0,7x)\* 
+ * (77470^2)5x2x5x((6,6)(6x,2x)(6x,4x)^2)(6,7x)(6,7x)(0,7x)\*
+ * (77470^2)5x2x5x((6,6)(6x,2x)(6x,4x)^2)(5x,9)(5x,4)
+are all valid siteswaps.
+
+
 ##Data Structures
 
 ### Tosses
@@ -239,11 +271,14 @@ transition will grow by 2.
           [[Toss(4, ' ')], [Toss(6, 'x')]]]
         - ([44],[44])(0,4) is represented by [[[Toss(4, ' '), Toss(4, ' ')],
           [Toss(4, ' '), Toss(4, ' ')]], [[Toss(0, ' ')], [Toss(4, ' ')]]]
+ - Conveniently, the get_transition() function returns a siteswap which makes
+   printing pretty easy.
 
 ### States
  - A state is what results when you call get_state() on a siteswap.
  - A state is an int list list where the outer list is required to be of length
    2
+ - Both internal int lists must be sorted
  - It represents the drop state of a siteswap
  - The first internal int list represents the beats on which balls will fall on
    the left and the second internal int list represents the beats on which a
