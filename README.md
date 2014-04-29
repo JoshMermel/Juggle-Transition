@@ -144,13 +144,11 @@ siteswaps mixing sync and async throws.
  - (5^5)83x43x((6x,4)(4,6x)^2)(8,5x)(4,5x)* is valid in jugglinglab but isn't if
    the number of 5's is even or if the star is removed
  - (5^6)8x3x43x((6x,4)(4,6x)^2)(8,5x)(4,5x)* is valid in jugglinglab but isn't
-   if
-   the number of 5's is even or if the star is removed
+   if the number of 5's is odd or if the star is removed
  - (5^6)8x3x43x((6x,4)(4,6x)^2)(7x,a)(7x,6)(2x,0) is valid in jugglinglab but
-   isn't if the number of 5's is even or if a star is added
+   isn't if the number of 5's is odd or if a star is added
  - (5^5)83x43x((6x,4)(4,6x)^2)(7x,a)(7x,6)(2x,0) is valid in jugglinglab but
-   isn't
-   if the number of 5's is even or if a star is added.
+   isn't if the number of 5's is even or if a star is added.
 
 As you can see, for each pair of transitions between 5 and (6x,4)\* there is a
 way to make jugglinglab like that transition.  I've yet to figure out exactly
