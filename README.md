@@ -6,7 +6,7 @@ Given two valid juggling sequences of the same number of balls,
 Juggle-Transition finds a transition between them.  If either is async it will
 find two transitions, one for starting the pattern on the left and the other
 for starting it on the right.  The transitions are suitable to be animated by
-jugglinglab except in very specific cases which are details below.
+jugglinglab except in very specific cases which are detailed below.
 
 ## Usage
 
